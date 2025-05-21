@@ -17,25 +17,92 @@ public class UsersController {
         List<Users> listUsers = service.listAll(keyword);
         model.addAttribute("listUsers", listUsers);
         model.addAttribute("keyword", keyword);
-        return "index";}
+        model.addAttribute("user", new Users()); // Для формы
+        return "index";
+    }
+
+    @PostMapping("/submit-appointment")
+    public String submitAppointment(@ModelAttribute Users user, Model model) {
+        service.save(user);
+        model.addAttribute("service", user.getService());
+        model.addAttribute("firstName", user.getFirstName());
+        model.addAttribute("lastName", user.getLastName());
+        model.addAttribute("date", user.getAppointmentDate());
+        model.addAttribute("time", user.getAppointmentTime());
+        model.addAttribute("address", user.getAppointmentAddress());
+        return "appointment";
+    }
+
     @RequestMapping("/passport-appointment")
     public String passportAppointment(Model model) {
         model.addAttribute("service", "Получение паспорта");
-        model.addAttribute("date", "22 мая 2025 г.");
-        model.addAttribute("time", "10:00");
-        model.addAttribute("address", "ул. Пушкина, д. 1, г. Москва");
-        return "appointment";}
+        model.addAttribute("firstName", ""); // Пустое значение, т.к. метод устарел
+        model.addAttribute("lastName", "");
+        model.addAttribute("date", "");
+        model.addAttribute("time", "");
+        model.addAttribute("address", "");
+        return "appointment";
+    }
+
     @RequestMapping("/car-registration")
     public String carRegistration(Model model) {
         model.addAttribute("service", "Регистрация автомобиля");
-        model.addAttribute("date", "21 апреля 2025 г.");
-        model.addAttribute("time", "11:30");
-        model.addAttribute("address", "ул. Лермонтова, д. 2, г. Москва");
-        return "appointment";}
+        model.addAttribute("firstName", "");
+        model.addAttribute("lastName", "");
+        model.addAttribute("date", "");
+        model.addAttribute("time", "");
+        model.addAttribute("address", "");
+        return "appointment";
+    }
+
     @RequestMapping("/license-appointment")
     public String licenseAppointment(Model model) {
         model.addAttribute("service", "Выдача водительских прав");
-        model.addAttribute("date", "17 мая 2025 г.");
-        model.addAttribute("time", "12:00");
-        model.addAttribute("address", "ул. Есенина, д. 3, г. Москва");
-        return "appointment";}}
+        model.addAttribute("firstName", "");
+        model.addAttribute("lastName", "");
+        model.addAttribute("date", "");
+        model.addAttribute("time", "");
+        model.addAttribute("address", "");
+        return "appointment";
+    }
+}
+
+
+
+
+
+//    @PostMapping("/submit-appointment")
+//    public String submitAppointment(@ModelAttribute Users user, Model model) {
+//        service.save(user);
+//        model.addAttribute("service", user.getService());
+//        model.addAttribute("AV", user.getAv());
+//        model.addAttribute("City", user.getCity());
+//        model.addAttribute("firstName", user.getFirstName());
+//        model.addAttribute("lastName", user.getLastName());
+//        model.addAttribute("date", "20 мая 2025 г.");
+//        model.addAttribute("time", "10:00");
+//        model.addAttribute("address", "ул. Примерная, д. 1, г. Москва");
+//        return "appointment";
+//    }
+//    @RequestMapping("/passport-appointment")
+//    public String passportAppointment(Model model) {
+//        model.addAttribute("service", "Получение паспорта");
+//        model.addAttribute("date", "22 мая 2025 г.");
+//        model.addAttribute("time", "10:00");
+//        model.addAttribute("address", "ул. Пушкина, д. 1, г. Москва");
+//        return "appointment";}
+//    @RequestMapping("/car-registration")
+//    public String carRegistration(Model model) {
+//        model.addAttribute("service", "Регистрация автомобиля");
+//        model.addAttribute("date", "21 апреля 2025 г.");
+//        model.addAttribute("time", "11:30");
+//        model.addAttribute("address", "ул. Лермонтова, д. 2, г. Москва");
+//        return "appointment";}
+//    @RequestMapping("/license-appointment")
+//    public String licenseAppointment(Model model) {
+//        model.addAttribute("service", "Выдача водительских прав");
+//        model.addAttribute("date", "17 мая 2025 г.");
+//        model.addAttribute("time", "12:00");
+//        model.addAttribute("address", "ул. Есенина, д. 3, г. Москва");
+//        return "appointment";}}
+
