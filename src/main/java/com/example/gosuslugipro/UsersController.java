@@ -67,7 +67,7 @@ public class UsersController {
     }
 
     @RequestMapping("/about_me")
-    public String aboutMe() {
+    public String aboutMe(Model model) {
         return "aboutMe";
     }
 
