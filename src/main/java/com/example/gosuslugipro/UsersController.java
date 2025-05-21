@@ -65,6 +65,12 @@ public class UsersController {
         model.addAttribute("address", "");
         return "appointment";
     }
+
+    @RequestMapping("/about_me")
+    public String aboutMe() {
+        return "aboutMe";
+    }
+
 }
 
 
